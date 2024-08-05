@@ -1,0 +1,203 @@
+body {
+    font-family: Arial, sans-serif;
+    /* Hapus linear-gradient dan ganti dengan background image */
+    background-image: url("/static/css/cpk.jpg");
+    background-size: cover; /* Menyesuaikan ukuran gambar dengan layar */
+    background-position: center; /* Posisi gambar di tengah */
+    color: white;
+    text-align: center;
+    margin: 0; /* Hapus default margin */
+    padding: 0; /* Hapus default padding */
+}
+
+
+
+nav {
+    display: flex;
+    align-items: center;
+    background-color: #292c30; /* Optional: background color for the navbar */
+  }
+  
+  nav .logo img {
+    height: 40px; /* Adjust the height as needed to match the navbar items */
+    margin-right: 10px; /* Optional: space between the logo and the menu items */
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0 auto 0 40px;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #ffffff; /* Adjust the color as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+  }
+  
+
+nav ul li a:hover {
+    background: linear-gradient(to bottom, #333 0%, #555 100%); /* Gradien latar belakang saat dihover */
+    color: #00ff2a; /* Warna teks saat dihover */
+}
+
+.content {
+    margin-top: 2em;
+}
+
+.responsive-image {
+    max-width: 50%; /* Mengatur lebar maksimum gambar */
+    height: auto; /* Menjaga rasio aspek gambar */
+    display: block; /* Menampilkan gambar sebagai blok */
+    margin: 0 auto; /* Memusatkan gambar */
+}
+
+.center-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.center-table th, .center-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.center-table thead th {
+    background-color: #192735; /* Warna latar belakang header */
+    color: white;
+    font-weight: bold;
+}
+
+.center-table tbody tr {
+    background-color: #212020; /* Warna latar belakang baris default */
+}
+
+.center-table tbody tr:nth-child(even) {
+    background-color: #212020; /* Warna latar belakang baris genap */
+}
+
+.center-table tbody tr:hover {
+    background-color: #46df43; /* Warna latar belakang saat hover */
+}
+
+.center-table tbody td {
+    border-bottom: 1px solid #212020; /* Garis batas bawah sel */
+}
+
+.center-table tbody tr:last-child td {
+    border-bottom: none; /* Menghilangkan border bawah pada baris terakhir */
+}
+
+.center-table tbody td:first-child {
+    background-color: #212020; /* Warna latar belakang kolom pertama */
+}
+
+.center-table tbody td:last-child {
+    background-color: #212020; /* Warna latar belakang kolom terakhir */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+} 
+
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #292c30;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+p {
+    font-size: 1rem; /* Ukuran font */
+    color: #fff6f6; /* Warna teks */
+    margin-bottom: 20px; /* Jarak bawah dari elemen berikutnya */
+    line-height: 1.6; /* Jarak antar baris teks */
+}
+
+.camera-container {
+    display: flex;
+    justify-content: center; /* Menempatkan gambar di tengah horizontal */
+    align-items: center; /* Menempatkan gambar di tengah vertikal */
+    height: 80vh; /* Tinggi kontainer, menyesuaikan dengan kebutuhan */
+    width: 100%; /* Lebar kontainer, menyesuaikan dengan kebutuhan */
+    overflow: hidden; /* Menyembunyikan bagian gambar yang melebihi batas kontainer */
+    margin-top: 20px; /* Jarak atas dari elemen sebelumnya */
+}
+
+.camera-feed {
+    max-width: 100%; /* Memastikan gambar tidak melebihi lebar kontainer */
+    max-height: 100%; /* Memastikan gambar tidak melebihi tinggi kontainer */
+}
+
+/* Style untuk Form Pencarian */
+.search-form {
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    margin: 20px 0;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+    outline: none;
+    width: 300px; /* Set a fixed width */
+}
+
+.search-form input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #007bff;
+    border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+    border-color: #004494;
+}
+
+/* Add this to your existing CSS file */
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.update-button, .save-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    width: 80px; /* Ensure both buttons have the same width */
+    height: 40px; /* Ensure both buttons have the same height */
+}

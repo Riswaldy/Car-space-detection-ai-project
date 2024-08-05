@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Note</h1>
+
+<!-- Formulir Pencarian -->
+<form method="get" action="{{ url_for('note') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search Parking Number or Status" value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
+
+<table class="center-table" border="1" id="parkingTable">
+    <thead class="thead-dark">
+        <tr>
+            <th>Parking Number</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in parking_data %}
+        <tr>
+            <td contenteditable="false">{{ row.parking_number }}</td>
+            <td contenteditable="false">{{ row.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Button Container -->
+<div class="button-container">
+    <button id="updateButton" class="update-button">Update</button>
+    <button id="saveButton" class="save-button">Save</button>
+</div>
+
+<!-- Pagination -->
+<ul class="pagination">
+    {% if page > 1 %}
+    <li>
+        <a href="{{ url_for('note', page=1, search=request.args.get('search', '')) }}">&laquo; First</a>
+    </li>
+    <li>
+        <a href="{{ url_for('note', page=page-1, search=request.args.get('search', '')) }}">Previous</a>
+    </li>
+    {% endif %}
+    <li>
+        <span>Page {{ page }} of {{ total_pages }}</span>
+    </li>
+    {% if page < total_pages %}
+    <li>
+        <a href="{{ url_for('note', page=page+1, search=request.args.get('search', '')) }}">Next</a>
+    </li>
+    <li>
+        <a href="{{ url_for('note', page=total_pages, search=request.args.get('search', '')) }}">Last &raquo;</a>
+    </li>
+    {% endif %}
+</ul>
+
+<script>
+    document.getElementById('updateButton').addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent default form submission
+        var cells = document.querySelectorAll('#parkingTable td');
+        cells.forEach(function(cell) {
+            cell.contentEditable = "true";
+        });
+        document.getElementById('updateButton').style.visibility = 'visible';
+        document.getElementById('saveButton').style.visibility = 'visible';
+    });
+
+    document.getElementById('saveButton').addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent default form submission
+        var cells = document.querySelectorAll('#parkingTable td');
+        var updatedData = [];
+        var row = {};
+
+        cells.forEach(function(cell, index) {
+            cell.contentEditable = "false";
+            if (index % 2 === 0) {
+                row.parking_number = cell.textContent;
+            } else {
+                row.status = cell.textContent;
+                updatedData.push(row);
+                row = {};
+            }
+        });
+
+        // Send updated data to the server
+        fetch('{{ url_for("update_note") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        }).then(response => {
+            if (response.ok) {
+                alert('Data updated successfully!');
+            } else {
+                alert('Failed to update data.');
+            }
+        });
+
+        document.getElementById('saveButton').style.visibility = 'visible';
+        document.getElementById('updateButton').style.visibility = 'visible';
+    });
+</script>
+
+{% endblock %}

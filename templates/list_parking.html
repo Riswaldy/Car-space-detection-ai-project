@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="my-4">List Parking</h1>
+
+<!-- Formulir Pencarian -->
+<form method="get" action="{{ url_for('list_parking') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search Parking Number or Status" value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
+
+<table class="center-table" border="1">
+    <thead class="thead-dark">
+        <tr>
+            <th>Parking Number</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in parking_data %}
+        <tr>
+            <td>{{ row.parking_number }}</td>
+            <td>{{ row.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<ul class="pagination">
+    {% if page > 1 %}
+    <li>
+        <a href="{{ url_for('list_parking', page=1, search=request.args.get('search', '')) }}">&laquo; First</a>
+    </li>
+    <li>
+        <a href="{{ url_for('list_parking', page=page-1, search=request.args.get('search', '')) }}">Previous</a>
+    </li>
+    {% endif %}
+    <li>
+        <span>Page {{ page }} of {{ total_pages }}</span>
+    </li>
+    {% if page < total_pages %}
+    <li>
+        <a href="{{ url_for('list_parking', page=page+1, search=request.args.get('search', '')) }}">Next</a>
+    </li>
+    <li>
+        <a href="{{ url_for('list_parking', page=total_pages, search=request.args.get('search', '')) }}">Last &raquo;</a>
+    </li>
+    {% endif %}
+</ul>
+{% endblock %}

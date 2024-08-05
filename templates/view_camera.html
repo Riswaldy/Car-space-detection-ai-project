@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>View Camera</h1>
+<p>View Camera is a real-time monitoring page designed to observe and assess parking slot availability. Leveraging advanced AI technology, it uses bounding box detection to continuously analyze parking spaces. The system provides immediate feedback on whether each parking slot is occupied or available, ensuring efficient and up-to-date parking management.</p>
+<h3>Click Button Here!</h3>
+<button onclick="startCamera()">View</button>
+<div class="camera-container">
+    <img id="camera-feed" src="" alt="Camera Feed" class="camera-feed" style="display:none;">
+</div>
+
+<script>
+    function startCamera() {
+        var img = document.getElementById("camera-feed");
+        img.src = "{{ url_for('video_feed') }}";
+        img.style.display = "block";
+    }
+</script>
+{% endblock %}
